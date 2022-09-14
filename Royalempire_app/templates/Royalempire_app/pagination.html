@@ -1,0 +1,43 @@
+
+<div class="pagination flex justify-center border items-center mt-8 md:mx-52 bg-gray-300 border-gray-500 mx:3 mb-6 " id="">
+    <div class="step-links text-blue-500 flex gap-">
+        <div class="flex gap-">
+            {% if page_obj.has_previous %}
+                <a href="?page1" class="border-r border-l border-gray-600 px-2">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_number }} " class=" border-gray-600 px-2">previous</a>
+            {% endif %} 
+            {% for i in page_obj.paginator.page_range %}
+                <div class="">
+                    <div class="flex ">
+                        {% if user.number == i %}
+                            <div class="">
+                                <div class="flex">
+                                    {{ i }}
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="gap-4 px-2 border-gray-600 border-r border-t-none border-l">
+                                <a href="?page={{ i }}" hx-POST="index" hx-trigger="clicked" hx-target="#display_section">
+                                    <div class="flax gap-4">{{ i }}</div>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class=" ">
+            <span class="current text-red-500 px-2">
+                page {{page_obj.number}} of {{page_obj.paginator.num_pages}}.
+            </span>
+            {% if page_obj.has_next %}
+                <!-- <div > -->
+                    <a class="border-r border-l border-gray-600 px-2 " href="?page={{ page_obj.next_page_number }}" >next</a>
+                <!-- </div> -->
+                <!-- <div > -->
+                    <a class="border-r border-gray-600 px-2" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                <!-- </div> -->
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,160 @@
+{% extends "Royalemp_commerce/main.html" %}
+{% load static %}
+    {% block content %}
+        <div class="md:px-12 mt-28 px-6 ">
+            <h3 class="md:text-2xl text-xl ">
+                checkout
+            </h3>
+        </div>
+        <div class="row-span-1 md:px-24 lg:flex md:gap-12 mt-18 justify-center mx-8 inline-block  ">
+            <div class="order-last hidden md:block ">
+                <div class="shadow-xl rounded py-6 md:px-6 px-2 border-t bg-white justify-center flex  ">
+                    <form action="">
+                        <div class="sm:flex gap-6 py-2 mb-3 justify-center block ">
+                            <div class="mt-2">
+                                <input type="text" placeholder="Name.." class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                            </div>
+                            <div class="mt-2">
+                                <input type="email" name="" id="" placeholder="email" class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                            </div>
+                        </div>
+                        <!-- display only if product in not digital product(s) -->
+                        <div class="" id="shipping-info">
+                            <div class="border-t border-b py-3 text-gray-500 font-semibold ">
+                                Shopping Information
+                            </div>
+                            <div class="sm:flex gap-6 py-2 mb-3 pt-5 ">
+                                <div class="py-2 md:py-0">
+                                    <input type="text" placeholder="Address.." class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                                </div>
+                                <div class="py-2 md:py-0">
+                                    <input type="text" name="" id="" placeholder="City" class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                                </div>
+                            </div>
+                            <div class="sm:flex gap-6 py-2 mb-3 border-b mb-6 pb-6">
+                                <div class="py-2 md:py-0">
+                                    <input type="text" placeholder="State.." class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                                </div>
+                                <div class="py-2 md:py-0">
+                                    <input type="text" name="" id="" placeholder="Zip Code" class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center bg-green-400 text-gray-50 py-2 hover:bg-green-600 ">
+                            <button class=" ">
+                                continue
+                            </button>
+                        </div>
+                        <!-- payment options -->
+                    </form>
+                </div>
+                <div class="text-center mt-6 -mb-6 shadow-xl bg-white py-2 hidden">
+                    pay pal
+                </div>
+            </div>
+            <!-- Order Summary -->
+            <div class="border md:shadow-xl shadow-inner py-6 px-8 bg-white  mt-12 md:mt-0 order-first lg:px-12 ">
+                <div class="-mt-4 py-4">
+                    <a href="{% url 'cart' %}">
+                        <span class="border-2 border-gray-400 p-2 shadow cursor-pointer hover:shadow-md md:text-md text-xs ">
+                            << Back to cart
+                        </span>
+                    </a>
+                </div>
+                <div class="border-t border-b md:text-3xl text-xl text-gray-600 py-5 ">
+                    Order Summary
+                </div>
+                <div class="overflow-x-auto border-t">
+                    <!-- items on cart ready for checkout -->
+                    {% for checkout_item in items %}
+                        <div class="flex gap-6 py-4 items-center border-t border-b border-gray-100 text-xs -mx-2 ">
+                            <div class="  ">
+                                <img src="{{ checkout_item.product.imageURL }}" alt="item-image" class="object-contain lg:object-scale-down ">
+                                <!-- <img src="{% static 'img/placeholder.png' %}" alt=""> -->
+                            </div>
+                            <div class="">
+                                <div class="">
+                                    {{ checkout_item.product.name }}
+                                </div>
+                                <div class="md:gap-24 gap-6 flex">
+                                    <span class="">
+                                        ${{ checkout_item.product.price }}
+                                    </span>
+                                    <span class="">
+                                        <span>
+                                            {{ checkout_item.quantity}}
+                                        </span>
+                                    </span>
+                                    <span class="">
+                                        $&nbsp;{{ checkout_item.get_total|floatformat:2 }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="text-sm">
+                    <div class="font-semibold text-gray-700 ">
+                        Items: {{order.get_cart_items }}
+                    </div>
+                    <div class="font-semibold text-gray-700 ">
+                        Total: $ {{order.get_cart_total|floatformat:2 }}
+                    </div>
+                </div>
+            </div>
+            <div class="md:hidden block mt-8 ">
+                <div class="shadow-xl rounded py-6 md:px-6 px-2 border-t bg-white justify-center flex  ">
+                    <form action="">
+                        <div class="sm:flex gap-6 py-2 mb-3 justify-center block ">
+                            <div class="mt-2">
+                                <input type="text" placeholder="Name.." class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                            </div>
+                            <div class="mt-2">
+                                <input type="email" name="" id="" placeholder="email" class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                            </div>
+                        </div>
+                        <!-- display only if product in not digital product(s) -->
+                        <div class="" id="shipping-info">
+                            <div class="border-t border-b py-3 text-gray-500 font-semibold ">
+                                Shopping Information
+                            </div>
+                            <div class="sm:flex gap-6 py-2 mb-3 pt-5 ">
+                                <div class="py-2 md:py-0">
+                                    <input type="text" placeholder="Address.." class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                                </div>
+                                <div class="py-2 md:py-0">
+                                    <input type="text" name="" id="" placeholder="City" class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                                </div>
+                            </div>
+                            <div class="sm:flex gap-6 py-2 mb-3 border-b mb-6 pb-6">
+                                <div class="py-2 md:py-0">
+                                    <input type="text" placeholder="State.." class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                                </div>
+                                <div class="py-2 md:py-0">
+                                    <input type="text" name="" id="" placeholder="Zip Code" class="border px-3 shadow outline-none focus:bg-blue-50 text-xs py-3 px-12 ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center bg-green-400 text-gray-50 py-2 hover:bg-green-600 ">
+                            <button class=" ">
+                                continue
+                            </button>
+                        </div>
+                        <!-- payment options -->
+                    </form>
+                </div>
+                <div class="text-center mt-6 -mb-6 shadow-xl bg-white py-2 hidden">
+                    pay pal
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var shipping = '{{order.shipping}}'
+
+            if( shipping == 'False' ){
+                document.getElementById('shipping-info').innerHTML = ''
+            }
+
+        </script>
+    {% endblock content %}
+

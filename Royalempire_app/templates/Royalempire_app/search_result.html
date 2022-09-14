@@ -1,0 +1,27 @@
+
+
+{% if results %}
+    {% csrf_token %}
+    <ul class="justify-end block shadow-md  ">
+        {% for searched_items in results %}
+            <li class="border px-2 py-2 text-gray-500 flex justify-between items-center gap-4" >
+                {{ searched_items.item_name }}
+                <span class="cursor-pointer justify-end
+                    flex self-center 
+                    bg-blue-300
+                    text-gray-900 px-1 py1
+                    rounded shadow
+                    hover:bg-blue-400 hover:text-gray-800
+                    " 
+                    hx-vals='{"item_name":"{{searched_items.item_name}}"}'
+                    hx-post="add_search"
+                    >
+                    add
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %} 
+    <p>Item added</p>
+    {% comment %} <p>No item found</p> {% endcomment %}
+{% endif %}
